@@ -13,3 +13,20 @@
     <embed allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?url=<%= @sound.soundcloud_url %>&enable_api=true&object_id=yourPlayerId" type="application/x-shockwave-flash" width="100%" name="yourPlayerId"></embed>
   </object>
  </br>
+
+
+ <%= form_for @comment do |f| %>
+  <%= f.text_field :message %>
+  <%= f.hidden_field :commentable_type, :value => @comment.commentable.class.to_s %>
+  <%= f.hidden_field :commentable_id, :value => @comment.commentable.id %>
+  <%= f.submit :message %>
+<% end %>
+
+<ul>
+
+  <% @sound.comments.each do |comment| %>
+    <li><%= comment.message %></li>
+  <% end %>
+
+</ul>
+
